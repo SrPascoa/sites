@@ -1,0 +1,345 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Outfit', system-ui, sans-serif;
+
+  /* Paleta amostrada do logótipo: ouro no topo da chama, laranja no corpo,
+     ciano a passar a azul royal na base. */
+  --color-brand-gold: #f5a623;
+  --color-brand-orange: #f2711c;
+  --color-brand-ember: #e8552d;
+  --color-brand-blue: #29abe2;
+  --color-brand-deep: #1560bd;
+
+  --breakpoint-2k: 1440px;
+  --breakpoint-3xl: 1920px;
+
+  --max-width-screen-2k: 1440px;
+  --max-width-screen-3xl: 1600px;
+}
+
+/* BorderBeam (components/ui/BorderBeam.tsx). `inline` porque --duration só
+   existe no próprio elemento; no :root a variável ficaria inválida. */
+@theme inline {
+  --animate-border-beam: border-beam calc(var(--duration) * 1s) infinite linear;
+  @keyframes border-beam {
+    100% {
+      offset-distance: 100%;
+    }
+  }
+}
+
+/* Com movimento reduzido o feixe ficaria congelado num canto: esconde-se. */
+@media (prefers-reduced-motion: reduce) {
+  .border-beam {
+    display: none;
+  }
+}
+
+/* Global resets and helper classes */
+
+/* 
+  Modern CSS Reset 
+  Based on Andy Bell's reset
+*/
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Tailwind's built-in Preflight already handles margin resets. 
+   Removed custom margin: 0 reset to fix Tailwind Typography plugin conflicts. */
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  background-color: #030303;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(242, 113, 28, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 100% 50%, rgba(41, 171, 226, 0.05) 0%, transparent 40%);
+  color: #f4f4f5; /* zinc-100 */
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Custom Utilities – Premium Upgrade ─────────────────────────────────────── */
+
+:root {
+  color-scheme: dark;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(242, 113, 28, 0.4);
+  color: white;
+}
+
+/* Glassmorphism utility - Enhanced */
+.glass {
+  background: rgba(15, 15, 20, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Text Gradient utility — reproduz a chama do logótipo (brasa → laranja → ouro).
+   Deliberadamente não inclui o azul da marca: laranja e azul são quase
+   complementares, por isso um gradiente entre eles atravessa um cinzento
+   apagado, muito visível quando o título quebra em linhas no telemóvel. O azul
+   fica reservado para ícones e destaques pontuais. */
+.text-gradient {
+  background: linear-gradient(100deg, #E8552D 0%, #F2711C 40%, #F5A623 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Orange glow shadows — registered as utilities so variants (hover:) work.
+   Replaces repeated inline `shadow-[0_0_Npx_rgba(249,115,22,A)]` values. */
+@utility glow-orange-sm {
+  box-shadow: 0 0 15px rgba(242, 113, 28, 0.1);
+}
+@utility glow-orange-md {
+  box-shadow: 0 0 20px rgba(242, 113, 28, 0.3);
+}
+@utility glow-orange-lg {
+  box-shadow: 0 0 40px rgba(242, 113, 28, 0.5);
+}
+
+/* Blob Animation */
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+.animate-blob {
+  animation: blob 7s infinite;
+}
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #1f1f23;
+  border-radius: 10px;
+  border: 2px solid #050505;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2d2d34;
+}
+
+/* Feature Card Hover Polish */
+.feature-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.feature-card:hover {
+  transform: translateY(-8px);
+  background: rgba(24, 24, 27, 0.8);
+  border-color: rgba(242, 113, 28, 0.3);
+}
+
+/* Embeds de vídeo gerados por convertToHtml() e injetados nos containers `prose` */
+.video-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 2rem 0;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #000;
+}
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+
+/* Gentle snap scrolling — snaps when close to a section boundary but allows free scrolling */
+html {
+  scroll-snap-type: y proximity;
+}
+
+.snap-section {
+  scroll-snap-align: start;
+}
+
+/* ── Animated Grid Background ──────────────────────────────────────────────── */
+.animated-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: grid-drift 20s linear infinite;
+}
+
+@keyframes grid-drift {
+  0% { background-position: 0 0; }
+  100% { background-position: 60px 60px; }
+}
+
+/* Grid pulse dots */
+@keyframes grid-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.3; box-shadow: 0 0 4px currentColor; }
+  50% { transform: scale(3); opacity: 0.8; box-shadow: 0 0 20px currentColor, 0 0 40px currentColor; }
+}
+.animate-grid-pulse {
+  animation: grid-pulse 4s ease-in-out infinite;
+}
+
+/* ── Infinite Marquee ──────────────────────────────────────────────────────── */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee-scroll 18s linear infinite;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Sem pausa no hover: as etiquetas não são clicáveis nem há nada para ler com
+   calma, e a faixa atravessa o ecrã todo — bastava o rato pousar ali para a
+   animação congelar e parecer avariada. */
+
+/* O `overflow: hidden` da janela corta exatamente na caixa da lista, o que
+   raspava a borda inferior das etiquetas. Esta folga devolve-lhes o contorno
+   completo. */
+.marquee-viewport {
+  padding-block: 0.5rem;
+}
+
+/* Exceção deliberada ao bloco `prefers-reduced-motion` lá em cima, que com
+   `!important` congelava também esta faixa — deixando-a parada a meio do ciclo,
+   com metade das etiquetas repetidas. Aqui continua a andar.
+
+   A troca: quem tiver movimento reduzido ativo por sensibilidade vestibular vê
+   na mesma este deslize (lento, linear e sem paralaxe, dos tipos mais suaves).
+   Para voltar ao comportamento acessível, apagar este bloco e repor o fallback
+   estático — está descrito no README. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation-duration: 18s !important;
+    animation-iteration-count: infinite !important;
+  }
+}
+
+/* ── Mouse-Tracking Glow Card ──────────────────────────────────────────────── */
+.glow-card {
+  position: relative;
+  overflow: hidden;
+}
+.glow-card::before {
+  content: '';
+  position: absolute;
+  top: var(--glow-y, 50%);
+  left: var(--glow-x, 50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(242, 113, 28, 0.12) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+.glow-card:hover::before {
+  opacity: 1;
+}
+
+/* ── Floating animation for decorative elements ────────────────────────────── */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-12px) rotate(2deg); }
+  75% { transform: translateY(8px) rotate(-1deg); }
+}
+@keyframes float-medium {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(-3deg); }
+}
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+.animate-float-medium {
+  animation: float-medium 6s ease-in-out infinite;
+}
+
+/* Hide the tawk.to chat widget when the mobile menu is open. TawkToWidget also
+   calls Tawk_API.hideWidget(); this covers the window before the script loads. */
+body.mobile-menu-open iframe[title*="chat widget" i] {
+  display: none !important;
+}
