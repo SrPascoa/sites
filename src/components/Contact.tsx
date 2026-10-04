@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { SyntheticEvent } from 'react';
-import { CalendarCheck, Clock, Mail, MapPin, Send } from 'lucide-react';
+import { CalendarCheck, ChevronDown, Clock, Mail, MapPin, Send } from 'lucide-react';
 import { app, contact, whatsappUrl } from '../config/site';
 import { Button, ButtonLink } from './ui/Button';
 import Reveal from './ui/Reveal';
@@ -14,8 +14,9 @@ const situationOptions = [
   'Tenho site, mas não recebo pedidos',
 ];
 
+// text-base (16px) de propósito: abaixo disso o Safari do iPhone faz zoom ao tocar no campo.
 const inputClass =
-  'w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-zinc-100 placeholder:text-zinc-600 transition-colors focus:border-brand-orange/50 focus:outline-none focus:ring-1 focus:ring-brand-orange/40';
+  'w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3 text-base text-zinc-100 placeholder:text-zinc-600 transition-colors focus:border-brand-orange/50 focus:outline-none focus:ring-1 focus:ring-brand-orange/40';
 
 /**
  * O formulário não tem backend: monta a mensagem e abre o WhatsApp já
@@ -45,13 +46,13 @@ export default function Contact() {
   }
 
   return (
-    <section id="contato" className="relative scroll-mt-24 overflow-hidden py-20 sm:py-24 lg:py-32">
+    <section id="contato" className="relative overflow-hidden py-16 sm:py-24 lg:py-32">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-0 h-96 w-[40rem] -translate-x-1/2 rounded-full bg-brand-orange/10 blur-[130px]" />
       </div>
 
       <Container>
-        <div className="grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+        <div className="grid gap-10 sm:gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <div>
             <SectionHeading
               align="left"
@@ -65,26 +66,26 @@ export default function Contact() {
             />
 
             <Reveal delay={0.1}>
-              <ul className="mt-10 space-y-5">
+              <ul className="mt-8 space-y-5 sm:mt-10">
                 <li className="flex items-start gap-4">
                   <CalendarCheck className="mt-0.5 h-5 w-5 shrink-0 text-brand-orange" />
                   <div>
                     <p className="font-semibold">Resposta no próprio dia útil</p>
-                    <p className="text-sm text-zinc-500">Falamos consigo antes de qualquer proposta.</p>
+                    <p className="mt-0.5 text-sm text-zinc-400 sm:mt-0 sm:text-zinc-500">Falamos consigo antes de qualquer proposta.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
                   <Clock className="mt-0.5 h-5 w-5 shrink-0 text-brand-orange" />
                   <div>
                     <p className="font-semibold">{contact.hours}</p>
-                    <p className="text-sm text-zinc-500">Mensagens fora deste horário são respondidas no dia seguinte.</p>
+                    <p className="mt-0.5 text-sm text-zinc-400 sm:mt-0 sm:text-zinc-500">Mensagens fora deste horário são respondidas no dia seguinte.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
                   <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-brand-orange" />
                   <div>
                     <p className="font-semibold">{contact.location}</p>
-                    <p className="text-sm text-zinc-500">Reunião por videochamada ou telefone, à sua escolha.</p>
+                    <p className="mt-0.5 text-sm text-zinc-400 sm:mt-0 sm:text-zinc-500">Reunião por videochamada ou telefone, à sua escolha.</p>
                   </div>
                 </li>
               </ul>
@@ -111,7 +112,7 @@ export default function Contact() {
           <Reveal delay={0.12}>
             <form
               onSubmit={handleSubmit}
-              className="rounded-3xl border border-white/10 bg-zinc-950/60 p-7 backdrop-blur-sm sm:p-9"
+              className="rounded-3xl border border-white/10 bg-zinc-950/60 p-5 backdrop-blur-sm min-[400px]:p-7 sm:p-9"
             >
               <div className="space-y-5">
                 <div>
@@ -123,6 +124,9 @@ export default function Contact() {
                     required
                     value={form.name}
                     onChange={set('name')}
+                    autoComplete="name"
+                    autoCapitalize="words"
+                    enterKeyHint="next"
                     placeholder="Como podemos tratá-lo?"
                     className={inputClass}
                   />
@@ -137,6 +141,9 @@ export default function Contact() {
                     required
                     value={form.business}
                     onChange={set('business')}
+                    autoComplete="organization"
+                    autoCapitalize="sentences"
+                    enterKeyHint="next"
                     placeholder="Ex.: restaurante em Vila Real"
                     className={inputClass}
                   />
@@ -146,13 +153,24 @@ export default function Contact() {
                   <label htmlFor="situation" className="mb-2 block text-sm font-medium text-zinc-300">
                     Tem site neste momento?
                   </label>
-                  <select id="situation" value={form.situation} onChange={set('situation')} className={inputClass}>
-                    {situationOptions.map((option) => (
-                      <option key={option} value={option} className="bg-zinc-900">
-                        {option}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="relative">
+                    <select
+                      id="situation"
+                      value={form.situation}
+                      onChange={set('situation')}
+                      className={`${inputClass} appearance-none pr-11`}
+                    >
+                      {situationOptions.map((option) => (
+                        <option key={option} value={option} className="bg-zinc-900">
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown
+                      aria-hidden="true"
+                      className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-500"
+                    />
+                  </div>
                 </div>
 
                 <div>
@@ -164,6 +182,7 @@ export default function Contact() {
                     rows={4}
                     value={form.message}
                     onChange={set('message')}
+                    autoCapitalize="sentences"
                     placeholder="Ex.: receber pedidos de orçamento e marcações."
                     className={`${inputClass} resize-none`}
                   />

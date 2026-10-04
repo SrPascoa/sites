@@ -20,14 +20,17 @@ const platformLinks = [
   { href: app.url, label: 'Entrar na app', Icon: LogIn },
 ];
 
-const linkClass = 'text-sm text-zinc-400 transition-colors hover:text-brand-orange';
+// Em ecrãs táteis (telemóvel, tablet, iPad deitado) cada link ganha altura de toque; com rato, no desktop, volta ao tamanho do texto.
+const linkClass =
+  'py-1.5 text-sm text-zinc-400 transition-colors hover:text-brand-orange lg:[@media(pointer:fine)]:py-0';
 
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-black/60">
-      <Container className="py-16 lg:py-20">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_1fr_1fr_1.3fr]">
-          <div className="sm:col-span-2 lg:col-span-1">
+      {/* Folga em baixo para o botão flutuante do WhatsApp não tapar o copyright. */}
+      <Container className="pb-[calc(7rem+env(safe-area-inset-bottom))] pt-12 sm:pt-16 lg:pt-20">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-12 lg:grid-cols-4 xl:grid-cols-[1.4fr_0.8fr_1fr_1fr_1.3fr]">
+          <div className="col-span-2 lg:col-span-4 xl:col-span-1">
             <a href="#topo" aria-label={`${site.name} ${site.nameAccent} — início`}>
               <Logo size="sm" />
             </a>
@@ -43,7 +46,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="rounded-full border border-white/10 bg-white/5 p-2.5 text-zinc-400 transition-colors hover:border-brand-orange/30 hover:text-brand-orange"
+                  className="rounded-full border border-white/10 bg-white/5 p-3 text-zinc-400 lg:p-2.5 transition-colors hover:border-brand-orange/30 hover:text-brand-orange"
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -53,16 +56,16 @@ export default function Footer() {
 
           <nav aria-label="Navegação do rodapé">
             <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-200">Navegar</h2>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4 space-y-1 lg:mt-5 lg:[@media(pointer:fine)]:space-y-3">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className={linkClass}>
+                  <a href={link.href} className={`inline-block ${linkClass}`}>
                     {link.label}
                   </a>
                 </li>
               ))}
               <li>
-                <a href="#sobre" className={linkClass}>
+                <a href="#sobre" className={`inline-block ${linkClass}`}>
                   Sobre
                 </a>
               </li>
@@ -71,10 +74,10 @@ export default function Footer() {
 
           <div>
             <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-200">Serviços</h2>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4 space-y-1 lg:mt-5 lg:[@media(pointer:fine)]:space-y-3">
               {serviceGroups.map((group) => (
                 <li key={group.id}>
-                  <a href="#servicos" className={linkClass}>
+                  <a href="#servicos" className={`inline-block ${linkClass}`}>
                     {group.title}
                   </a>
                 </li>
@@ -82,9 +85,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="col-span-2 sm:col-span-1">
             <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-200">Plataforma</h2>
-            <ul className="mt-5 space-y-3">
+            <ul className="mt-4 space-y-1 lg:mt-5 lg:[@media(pointer:fine)]:space-y-3">
               {platformLinks.map(({ href, label, Icon }) => (
                 <li key={label}>
                   <a
@@ -101,7 +104,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="col-span-2 sm:col-span-1">
             <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-200">Contacto</h2>
             <ul className="mt-5 space-y-4">
               <li>
@@ -138,7 +141,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 space-y-3 border-t border-white/10 pt-8 text-xs leading-relaxed text-zinc-500">
+        <div className="mt-10 space-y-3 border-t sm:mt-14 border-white/10 pt-8 text-xs leading-relaxed text-zinc-500">
           <p>
             {company.legalName} · NIPC {company.nipc} · NIF Comunitário {company.vatId} · {fullAddress}
           </p>
@@ -165,7 +168,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="mt-6 flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
+        <div className="mt-6 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center sm:gap-4">
           <p className="text-sm text-zinc-500">
             © {new Date().getFullYear()} {company.legalName} Todos os direitos reservados.
           </p>

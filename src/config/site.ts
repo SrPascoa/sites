@@ -62,9 +62,6 @@ export const app = {
   booking: 'https://app.brivon.pt/#/book/brivon-pt?type=40e7aa7b-5f09-4308-8dfa-26582ba700a6',
 } as const;
 
-/** Widget de chat tawk.to — `propertyId/widgetId`. */
-export const tawkTo = '6a653275846c4d1d49b063cf/1judkq7ds';
-
 /** Mensagem pré-preenchida no WhatsApp. */
 export const whatsappUrl = (
   message = 'Olá! Vi o site da Brivon e quero um site para o meu negócio.',

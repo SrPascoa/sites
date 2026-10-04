@@ -13,7 +13,7 @@ const proofPoints = ['Vê o site antes de aprovar', 'Domínio sempre em seu nome
 
 export default function Hero() {
   return (
-    <section id="topo" className="relative overflow-hidden pb-20 pt-10 sm:pt-14 lg:pb-28 lg:pt-8">
+    <section id="topo" className="relative overflow-hidden pb-16 pt-8 sm:pb-20 sm:pt-14 lg:pb-28 lg:pt-8">
       {/* Fundo decorativo */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div className="animated-grid absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_75%)]" />
@@ -24,10 +24,10 @@ export default function Hero() {
       <Container>
         <div className="mx-auto max-w-4xl text-center 2xl:max-w-6xl">
           <Reveal immediate delay={0.08}>
-            <h1 className="text-balance font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05] 2xl:text-[4rem]">
+            <h1 className="text-balance font-display text-[2.125rem] font-bold leading-[1.08] tracking-tight min-[400px]:text-4xl sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05] 2xl:text-[4rem]">
               Criamos o site do seu negócio.
               <br />
-              <span className="text-gradient">No ar em 7 dias, desde 199&nbsp;€.</span>
+              <span className="text-gradient">No ar em 7 dias, desde&nbsp;199&nbsp;€.</span>
             </h1>
           </Reveal>
         </div>
@@ -37,7 +37,7 @@ export default function Hero() {
 
         <div className="mx-auto mt-8 max-w-4xl text-center lg:mt-5">
           <Reveal immediate delay={0.16}>
-            <p className="mx-auto max-w-2xl text-pretty text-lg leading-relaxed text-zinc-400 sm:text-xl lg:max-w-4xl lg:text-lg">
+            <p className="mx-auto max-w-2xl text-pretty text-[1.0625rem] leading-relaxed text-zinc-400 sm:text-xl lg:max-w-4xl lg:text-lg">
               Sites profissionais para negócios locais, preparados para aparecer no Google e receber pedidos por
               WhatsApp. Quantos clientes o procuraram esta semana e não o encontraram?
             </p>
@@ -63,7 +63,7 @@ export default function Hero() {
           </Reveal>
 
           <Reveal immediate delay={0.32}>
-            <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 lg:mt-4">
+            <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 max-sm:mx-auto max-sm:w-fit max-sm:flex-col max-sm:items-start lg:mt-4">
               {proofPoints.map((point) => (
                 <li key={point} className="flex items-center gap-2 text-sm text-zinc-500">
                   <CircleCheckBig className="h-4 w-4 shrink-0 text-brand-orange/80" />
@@ -76,17 +76,17 @@ export default function Hero() {
 
         {/* Barra de métricas */}
         <Reveal immediate delay={0.4}>
-          <dl className="relative mt-16 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 lg:mt-24 lg:grid-cols-4">
+          <dl className="relative mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 lg:mt-24 lg:grid-cols-4">
             <BorderBeam size={320} duration={16} colorFrom="var(--color-brand-blue)" colorTo="var(--color-brand-deep)" />
             {heroStats.map((stat) => (
-              <div key={stat.label} className="bg-zinc-950/80 px-5 py-8 text-center backdrop-blur-sm sm:px-6 sm:py-10">
+              <div key={stat.label} className="bg-zinc-950/80 px-3 py-8 text-center backdrop-blur-sm min-[360px]:px-5 sm:px-6 sm:py-10">
                 <dt className="sr-only">{stat.label}</dt>
                 <dd>
                   <CountUp
                     to={stat.value}
                     prefix={stat.prefix}
                     suffix={stat.suffix}
-                    className="block font-display text-3xl font-bold tracking-tight text-brand-orange sm:text-4xl lg:text-5xl"
+                    className="block font-display text-[1.75rem] font-bold tracking-tight text-brand-orange min-[360px]:text-3xl sm:text-4xl lg:text-5xl"
                   />
                   <span className="mt-2.5 block text-xs leading-snug text-zinc-400 sm:text-sm">{stat.label}</span>
                 </dd>

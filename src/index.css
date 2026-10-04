@@ -69,6 +69,7 @@ html:focus-within {
 /* Set core body defaults */
 body {
   min-height: 100vh;
+  min-height: 100dvh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
   background-color: #030303;
@@ -77,6 +78,20 @@ body {
     radial-gradient(circle at 100% 50%, rgba(41, 171, 226, 0.05) 0%, transparent 40%);
   color: #f4f4f5; /* zinc-100 */
   overflow-x: hidden;
+}
+
+/* No telemóvel, o `overflow-x: hidden` do body não chega: as manchas animadas do
+   hero passavam a borda e o navegador alargava a área da página (490px num ecrã
+   de 390). Durante o scroll essa largura variava e o que é fixo nos cantos
+   (botão do WhatsApp) saltava e saía do ecrã. `clip` recorta sem criar
+   um contentor de scroll (com `hidden` no html, o body passava a fazer scroll e o
+   cabeçalho fixo deixava de funcionar). Navegadores sem `clip` ficam com o
+   `hidden` acima. */
+@supports (overflow-x: clip) {
+  html,
+  body {
+    overflow-x: clip;
+  }
 }
 
 h1, h2, h3, h4 {
@@ -95,13 +110,9 @@ picture {
   display: block;
 }
 
-/* Inherit fonts for inputs and buttons */
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
+/* `font: inherit` em input/button/textarea/select já vem do Preflight do
+   Tailwind (camada base). Uma cópia aqui, fora das camadas, anulava qualquer
+   text-xs/text-sm posto num <button>. */
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
@@ -203,10 +214,14 @@ html {
 .feature-card {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.feature-card:hover {
-  transform: translateY(-8px);
-  background: rgba(24, 24, 27, 0.8);
-  border-color: rgba(242, 113, 28, 0.3);
+/* Só com rato: num ecrã tátil o :hover "cola" depois do toque e o cartão
+   ficava levantado até se tocar noutro sítio. */
+@media (hover: hover) and (pointer: fine) {
+  .feature-card:hover {
+    transform: translateY(-8px);
+    background: rgba(24, 24, 27, 0.8);
+    border-color: rgba(242, 113, 28, 0.3);
+  }
 }
 
 /* Embeds de vídeo gerados por convertToHtml() e injetados nos containers `prose` */
@@ -245,6 +260,14 @@ html {
     linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
   background-size: 60px 60px;
   animation: grid-drift 20s linear infinite;
+}
+
+/* Em ecrãs táteis a deriva repinta o fundo do hero a cada frame — pesado num
+   telemóvel modesto e quase impercetível num ecrã pequeno. */
+@media (hover: none) {
+  .animated-grid {
+    animation: none;
+  }
 }
 
 @keyframes grid-drift {
@@ -317,8 +340,10 @@ html {
   transition: opacity 0.4s ease;
   z-index: 0;
 }
-.glow-card:hover::before {
-  opacity: 1;
+@media (hover: hover) and (pointer: fine) {
+  .glow-card:hover::before {
+    opacity: 1;
+  }
 }
 
 /* ── Floating animation for decorative elements ────────────────────────────── */
@@ -338,8 +363,46 @@ html {
   animation: float-medium 6s ease-in-out infinite;
 }
 
-/* Hide the tawk.to chat widget when the mobile menu is open. TawkToWidget also
-   calls Tawk_API.hideWidget(); this covers the window before the script loads. */
-body.mobile-menu-open iframe[title*="chat widget" i] {
-  display: none !important;
+/* ── Telemóvel e tablet ────────────────────────────────────────────────────── */
+
+/* Altura do cabeçalho, partilhada pelo Header, pelo menu móvel e pelo
+   scroll-padding das âncoras. Telemóvel deitado: cabeçalho mais baixo, para não
+   comer um quarto do ecrã. */
+:root {
+  --header-h: 5rem;
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  :root {
+    --header-h: 4rem;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --header-h: 102px;
+  }
+}
+@media (min-width: 1920px) {
+  :root {
+    --header-h: 108px;
+  }
+}
+
+html {
+  /* As âncoras do menu param logo abaixo do cabeçalho fixo, em qualquer ecrã. */
+  scroll-padding-top: calc(var(--header-h) + 0.75rem);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* O retângulo azul do toque no iOS/Android; o feedback vem do active: dos botões. */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Sem o atraso de duplo toque para zoom nos elementos interativos. */
+a,
+button,
+label,
+summary,
+input,
+select,
+textarea {
+  touch-action: manipulation;
 }

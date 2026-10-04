@@ -29,7 +29,7 @@ export default function Sectors() {
   ];
 
   return (
-    <section className="border-y border-white/5 bg-black/40 py-10">
+    <section className="border-y border-white/10 bg-white/[0.04] lg:border-white/5 lg:bg-black/40 py-10">
       <Container>
         <p className="mb-7 text-center text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
           Sites para negócios locais de todos os setores

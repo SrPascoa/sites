@@ -12,7 +12,6 @@ import Pricing from './components/Pricing';
 import Sectors from './components/Sectors';
 import Seo from './components/Seo';
 import Services from './components/Services';
-import TawkToWidget from './components/TawkToWidget';
 import WhatsAppFab from './components/WhatsAppFab';
 
 export default function App() {
@@ -60,7 +59,6 @@ export default function App() {
 
       <Footer />
       <WhatsAppFab />
-      <TawkToWidget />
     </div>
   );
 }

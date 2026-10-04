@@ -14,9 +14,9 @@ const icons: Record<string, LucideIcon> = {
 
 export default function About() {
   return (
-    <section id="sobre" className="scroll-mt-24 border-y border-white/5 bg-black/40 py-20 sm:py-24 lg:py-32">
+    <section id="sobre" className="border-y border-white/10 bg-white/[0.04] lg:border-white/5 lg:bg-black/40 py-16 sm:py-24 lg:py-32">
       <Container>
-        <div className="grid gap-14 lg:grid-cols-2 lg:items-center lg:gap-20">
+        <div className="grid gap-10 sm:gap-14 lg:grid-cols-2 lg:items-center lg:gap-20">
           <div>
             <SectionHeading
               align="left"
@@ -26,7 +26,7 @@ export default function About() {
             />
 
             <Reveal delay={0.12}>
-              <div className="mt-9 space-y-4 border-l-2 border-brand-orange/40 pl-6">
+              <div className="mt-7 space-y-4 border-l-2 border-brand-orange/40 pl-5 sm:mt-9 sm:pl-6">
                 <p className="text-pretty leading-relaxed text-zinc-400">
                   {/* TODO: nome e fotografia de quem fala com o cliente — "É comigo que fala desde a primeira conversa." */}
                   Trabalhamos com negócios de todo o país, sempre com contacto direto com quem faz o seu site — não com
@@ -39,15 +39,18 @@ export default function About() {
             </Reveal>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
+          {/* Telemóvel: um só bloco com linhas (ícone à esquerda); a partir de sm, 4 cartões em grelha. */}
+          <div className="grid divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] sm:grid-cols-2 sm:gap-5 sm:divide-y-0 sm:overflow-visible sm:rounded-none sm:border-0 sm:bg-transparent">
             {differentiators.map((item, index) => {
               const Icon = icons[item.icon];
               return (
                 <Reveal key={item.title} delay={index * 0.08}>
-                  <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-brand-orange/25">
-                    <Icon className="mb-4 h-6 w-6 text-brand-orange" />
-                    <h3 className="text-base font-bold leading-snug">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-relaxed text-zinc-400">{item.body}</p>
+                  <div className="flex h-full gap-4 p-5 transition-colors sm:block sm:rounded-2xl sm:border sm:border-white/10 sm:bg-white/[0.03] sm:p-6 sm:hover:border-brand-orange/25">
+                    <Icon className="mt-0.5 h-6 w-6 shrink-0 text-brand-orange sm:mb-4 sm:mt-0" />
+                    <div>
+                      <h3 className="text-base font-bold leading-snug">{item.title}</h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-zinc-400 sm:mt-2">{item.body}</p>
+                    </div>
                   </div>
                 </Reveal>
               );

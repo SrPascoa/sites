@@ -256,9 +256,9 @@ function SideCard({
 }
 
 const chips = [
-  { Icon: Smartphone, text: 'Perfeito no telemóvel', className: 'left-[2%] top-[62%] md:left-[19%] md:top-[70%]', depth: 1.6 },
+  { Icon: Smartphone, text: 'Perfeito no telemóvel', className: 'left-[2%] top-[62%] md:left-[19%] md:top-[70%] lg:top-[64%]', depth: 1.6 },
   { Icon: Search, text: 'Aparece no Google', className: 'right-[2%] top-[4%] md:right-[20%] md:top-[2%]', depth: 1.3 },
-  { Icon: MessageCircle, text: 'Pedidos no WhatsApp', className: 'right-[4%] top-[74%] md:right-[18%] md:top-[78%]', depth: 1.8 },
+  { Icon: MessageCircle, text: 'Pedidos no WhatsApp', className: 'right-[4%] top-[74%] md:right-[18%] md:top-[78%] lg:top-[81%]', depth: 1.8 },
 ];
 
 export default function HeroVisual() {
@@ -314,6 +314,24 @@ export default function HeroVisual() {
     rawY.set(0);
   };
 
+  // Ecrãs táteis: deslizar o dedo na horizontal sobre a cena muda de setor.
+  // O `touch-action: pan-y` da cena deixa o deslocamento vertical da página
+  // intacto e entrega-nos só o gesto horizontal.
+  const swipeStart = useRef<{ x: number; y: number } | null>(null);
+  const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === 'mouse') return;
+    swipeStart.current = { x: event.clientX, y: event.clientY };
+  };
+  const onPointerUp = (event: PointerEvent<HTMLDivElement>) => {
+    const start = swipeStart.current;
+    swipeStart.current = null;
+    if (!start) return;
+    const dx = event.clientX - start.x;
+    const dy = event.clientY - start.y;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+    select((sectorIndex + (dx < 0 ? 1 : -1) + sectors.length) % sectors.length);
+  };
+
   const cursor = cursorPath[Math.min(step, cursorPath.length - 1)];
 
   // Em ecrãs grandes a cena mantém a proporção e a largura acompanha a altura do
@@ -325,7 +343,10 @@ export default function HeroVisual() {
         ref={sceneRef}
         onPointerMove={onPointerMove}
         onPointerLeave={onPointerLeave}
-        className="relative h-[19rem] [perspective:1400px] sm:h-[23rem] md:h-[26rem] lg:aspect-[2.55/1] lg:h-auto"
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        onPointerCancel={() => (swipeStart.current = null)}
+        className="relative h-[66vw] touch-pan-y [perspective:1400px] sm:h-[23rem] md:h-[26rem] lg:aspect-[2.55/1] lg:h-auto"
       >
         {/* Brilho atrás do portátil */}
         <div
@@ -447,7 +468,7 @@ export default function HeroVisual() {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.9 + index * 0.15, duration: 0.5 }}
-            className={`pointer-events-none absolute z-10 ${className}`}
+            className={`pointer-events-none absolute z-10 hidden sm:block ${className}`}
           >
             <motion.span
               animate={reduceMotion ? undefined : { y: [0, -8 * depth, 0] }}
@@ -465,8 +486,11 @@ export default function HeroVisual() {
 
       {/* Escolha de setor — a parte interativa explícita, também por teclado. */}
       {/* Em ecrãs grandes fica numa linha mesmo quando a cena é mais estreita que a fila (o excesso centra-se). */}
-      <div className="relative z-10 mt-6 flex flex-wrap items-center justify-center gap-2 whitespace-nowrap sm:mt-8 lg:mt-3 lg:flex-nowrap">
-        <span className="mr-1 text-sm text-zinc-500 lg:text-xs 2xl:text-sm">Veja um exemplo:</span>
+      <div className="relative z-10 mt-1 flex flex-wrap items-center justify-center gap-1.5 whitespace-nowrap sm:mt-8 sm:gap-2 lg:mt-3 lg:flex-nowrap">
+        <span className="hidden text-sm text-zinc-500 sm:mr-1 sm:inline lg:text-xs 2xl:text-sm">
+          <span className="lg:hidden [@media(hover:hover)]:hidden">Deslize ou escolha:</span>
+          <span className="hidden lg:inline [@media(hover:hover)]:inline">Veja um exemplo:</span>
+        </span>
         {sectors.map((s, index) => {
           const isActive = index === sectorIndex;
           return (
@@ -475,13 +499,13 @@ export default function HeroVisual() {
               type="button"
               onClick={() => select(index)}
               aria-pressed={isActive}
-              className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors lg:px-3 lg:py-1 lg:text-xs 2xl:px-3.5 2xl:py-1.5 2xl:text-sm ${
+              className={`inline-flex items-center justify-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium transition-colors active:scale-95 sm:min-h-10 sm:px-4 sm:py-2 sm:text-base lg:min-h-0 lg:px-3 lg:py-1 2xl:px-3.5 2xl:py-1.5 ${
                 isActive
                   ? 'border-brand-orange bg-brand-orange/15 text-white'
                   : 'border-white/10 bg-white/5 text-zinc-400 hover:border-white/25 hover:text-zinc-200'
               }`}
             >
-              <s.Icon className="size-3.5" />
+              <s.Icon className="hidden size-3.5 sm:block" />
               {s.label}
             </button>
           );
