@@ -9,7 +9,7 @@ export const site = {
   tagline: 'Sites profissionais para negócios locais',
   description:
     'Criação de sites profissionais para negócios locais, a partir de 199 €. No ar em 7 dias, com domínio em seu nome, otimizado para o Google e para receber pedidos por WhatsApp.',
-  url: 'https://brivon.pt',
+  url: 'https://sites.brivon.pt',
 
   /**
    * Símbolo da marca, servido a partir de `public/`.
