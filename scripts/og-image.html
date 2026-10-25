@@ -1,0 +1,60 @@
+<!doctype html>
+<!--
+  Fonte da imagem de partilha public/brand/og-default.png (1200×630).
+  Para a refazer depois de mudar o texto, a partir da raiz do projeto:
+
+  "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --headless=new --hide-scrollbars
+    --force-device-scale-factor=1 --virtual-time-budget=6000 --window-size=1200,630
+    --screenshot="%CD%\public\brand\og-default.png" "file:///%CD%/scripts/og-image.html"
+
+  Ver o resultado antes de publicar. Sem preços, números ou dados de clientes.
+-->
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; background: #030303; }
+  body { position: relative; font-family: 'Outfit', sans-serif; color: #f4f4f5; }
+  .glow1 { position: absolute; width: 640px; height: 640px; left: -160px; top: -260px; border-radius: 50%;
+           background: radial-gradient(circle, rgba(242,113,28,.30), transparent 65%); }
+  .glow2 { position: absolute; width: 620px; height: 620px; right: -200px; bottom: -280px; border-radius: 50%;
+           background: radial-gradient(circle, rgba(41,171,226,.24), transparent 65%); }
+  .grid { position: absolute; inset: 0; opacity: .5;
+          background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+          background-size: 48px 48px;
+          mask-image: radial-gradient(ellipse at 40% 50%, black 10%, transparent 75%); }
+  .wrap { position: relative; height: 100%; padding: 72px 80px; display: flex; flex-direction: column; }
+  .brand { display: flex; align-items: center; gap: 18px; }
+  .brand img { width: 68px; height: 68px; }
+  .brand span { font-size: 40px; font-weight: 700; letter-spacing: -.5px; }
+  .brand b { font-weight: 700; background: linear-gradient(90deg, #f5a623, #f2711c); -webkit-background-clip: text; color: transparent; }
+  h1 { margin-top: 62px; font-size: 74px; line-height: 1.04; font-weight: 800; letter-spacing: -1.5px; max-width: 980px; }
+  h1 em { font-style: normal; background: linear-gradient(90deg, #f5a623, #f2711c 45%, #e8552d); -webkit-background-clip: text; color: transparent; }
+  .pills { margin-top: 40px; display: flex; gap: 14px; font-family: 'Plus Jakarta Sans', sans-serif; }
+  .pill { padding: 12px 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05);
+          font-size: 23px; font-weight: 600; color: #e4e4e7; display: flex; align-items: center; gap: 10px; }
+  .pill i { width: 10px; height: 10px; border-radius: 50%; background: #f2711c; display: block; }
+  .pill:nth-child(2) i { background: #29abe2; }
+  .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: center;
+          font-family: 'Plus Jakarta Sans', sans-serif; font-size: 22px; color: #a1a1aa; }
+  .foot strong { color: #f4f4f5; font-weight: 600; }
+  .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: linear-gradient(90deg, #f5a623, #f2711c, #e8552d 50%, #29abe2 75%, #1560bd); }
+</style>
+</head>
+<body>
+  <div class="glow1"></div><div class="glow2"></div><div class="grid"></div>
+  <div class="wrap">
+    <div class="brand"><img src="../public/logo.png" alt=""><span>Brivon <b>Sites</b></span></div>
+    <h1>Sites profissionais para <em>negócios locais</em></h1>
+    <div class="pills">
+      <div class="pill"><i></i>Pensados para telemóvel</div>
+      <div class="pill"><i></i>Encontrados no Google</div>
+      <div class="pill"><i></i>Pedidos por WhatsApp</div>
+    </div>
+    <div class="foot"><span><strong>sites.brivon.pt</strong></span><span>Empresa portuguesa · Vila Real</span></div>
+  </div>
+  <div class="bar"></div>
+</body>
+</html>

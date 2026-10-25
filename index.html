@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt">
+<html lang="pt-PT">
   <head>
     <meta charset="UTF-8" />
     <!-- O logótipo da marca. O favicon.svg do template continua em public/ mas
@@ -10,21 +10,20 @@
     <meta name="theme-color" content="#030303" />
     <meta name="format-detection" content="telephone=no" />
 
+    <!-- Título, descrição, canónico, Open Graph, X e JSON-LD: gerados a partir
+         de src/config/seo.ts pelo plugin em scripts/seo-plugin.ts. -->
+    <!--seo:head-->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-
-    <title>Brivon Sites — Sites profissionais para negócios locais</title>
-    <meta
-      name="description"
-      content="Criação de sites profissionais para negócios locais, a partir de 199 €. No ar em 7 dias, com domínio em seu nome e preparado para o Google."
-    />
   </head>
   <body>
-    <div id="root"></div>
+    <!-- Resumo estático para robôs sem JavaScript; o React substitui-o ao arrancar. -->
+    <div id="root"><!--seo:fallback--></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

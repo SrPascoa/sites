@@ -1,5 +1,5 @@
 import { ArrowRight, CircleCheckBig } from 'lucide-react';
-import { heroStats } from '../config/content';
+import { hero, heroStats } from '../config/content';
 import { whatsappUrl } from '../config/site';
 import BorderBeam from './ui/BorderBeam';
 import { ButtonLink } from './ui/Button';
@@ -25,9 +25,9 @@ export default function Hero() {
         <div className="mx-auto max-w-4xl text-center 2xl:max-w-6xl">
           <Reveal immediate delay={0.08}>
             <h1 className="text-balance font-display text-[2.125rem] font-bold leading-[1.08] tracking-tight min-[400px]:text-4xl sm:text-5xl lg:text-[3.5rem] lg:leading-[1.05] 2xl:text-[4rem]">
-              Criamos o site do seu negócio.
+              {hero.title}
               <br />
-              <span className="text-gradient">No ar em 7 dias, desde&nbsp;199&nbsp;€.</span>
+              <span className="text-gradient">{hero.titleAccent}</span>
             </h1>
           </Reveal>
         </div>
@@ -38,8 +38,7 @@ export default function Hero() {
         <div className="mx-auto mt-8 max-w-4xl text-center lg:mt-5">
           <Reveal immediate delay={0.16}>
             <p className="mx-auto max-w-2xl text-pretty text-[1.0625rem] leading-relaxed text-zinc-400 sm:text-xl lg:max-w-4xl lg:text-lg">
-              Sites profissionais para negócios locais, preparados para aparecer no Google e receber pedidos por
-              WhatsApp. Quantos clientes o procuraram esta semana e não o encontraram?
+              {hero.subtitle}
             </p>
           </Reveal>
 

@@ -10,7 +10,6 @@ import Method from './components/Method';
 import Pillars from './components/Pillars';
 import Pricing from './components/Pricing';
 import Sectors from './components/Sectors';
-import Seo from './components/Seo';
 import Services from './components/Services';
 import WhatsAppFab from './components/WhatsAppFab';
 
@@ -34,7 +33,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen text-zinc-100 selection:bg-brand-orange/30">
-      <Seo />
       <a
         href="#conteudo"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-brand-orange focus:px-4 focus:py-2 focus:font-semibold focus:text-white"

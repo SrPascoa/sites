@@ -3,6 +3,17 @@
  * Separado de `site.ts` (dados da empresa) para manter cada ficheiro legível.
  */
 
+/**
+ * Título e subtítulo do hero. Também usados no resumo estático para robôs sem
+ * JavaScript (`scripts/seo-plugin.ts`), por isso vivem aqui e não no componente.
+ */
+export const hero = {
+  title: 'Criamos o site do seu negócio.',
+  titleAccent: 'No ar em 7 dias, desde 199 €.',
+  subtitle:
+    'Sites profissionais para negócios locais, preparados para aparecer no Google e receber pedidos por WhatsApp. Quantos clientes o procuraram esta semana e não o encontraram?',
+} as const;
+
 /** Métricas da barra do hero. `value` é numérico para a animação de contagem. */
 export const heroStats = [
   { value: 199, suffix: '€', prefix: '', label: 'Site profissional, a partir de' },
