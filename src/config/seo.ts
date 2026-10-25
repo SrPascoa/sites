@@ -31,7 +31,7 @@ export const TWITTER_HANDLE = '@brivon_pt';
 
 /** O que as IAs citam: 1–2 frases factuais sobre a marca. */
 export const ORGANIZATION_SUMMARY =
-  'A Brivon Sites é o serviço de criação de websites da Brivon, empresa portuguesa sediada em Vila Real. Cria sites profissionais para negócios locais — pensados para telemóvel, com os textos escritos pela equipa e preparados para aparecer no Google e receber pedidos por WhatsApp — e lojas online e projetos à medida, com suporte em português.';
+  'A Brivon Sites é o serviço de criação de websites da Brivon, empresa portuguesa sediada em Vila Real. Cria sites profissionais para empresas e negócios locais — pensados para telemóvel, com os textos escritos pela equipa e preparados para aparecer no Google e receber pedidos por WhatsApp — e lojas online e projetos à medida, com suporte em português.';
 
 /** Projetos fora dos planos fixos (plano "Projetos à medida" em `content.ts`). */
 export const CUSTOM_PROJECTS = ['Lojas online com pagamentos', 'Plataformas SaaS', 'CRM à medida', 'ERP e gestão interna'] as const;
@@ -40,13 +40,6 @@ export const CUSTOM_PROJECTS = ['Lojas online com pagamentos', 'Plataformas SaaS
 export const SISTER_BRANDS = [
   { name: 'Brivon Obras', url: 'https://obras.brivon.pt', summary: 'plataforma de gestão de obras, equipas, orçamentos e logística.' },
   { name: 'Brivon Tráfego', url: 'https://trafego.brivon.pt', summary: 'gestão de campanhas de Google Ads e Meta Ads.' },
-] as const;
-
-/** Páginas legais (vivem no portal). */
-export const LEGAL_PAGES = [
-  { name: 'Termos de Serviço', url: `${PORTAL_URL}/terms` },
-  { name: 'Política de Privacidade', url: `${PORTAL_URL}/privacy` },
-  { name: 'Política de Cookies', url: `${PORTAL_URL}/cookies` },
 ] as const;
 
 /** Empresa-mãe: o mesmo `@id` do portal, para os motores ligarem as duas entidades. */
@@ -82,7 +75,9 @@ export function buildServiceSchema() {
     image: SHARE_IMAGE.url,
     logo: `${SITE_URL}${site.logo}`,
     provider: PARENT_ORGANIZATION,
+    // Portugal continental, Açores e Madeira; só empresas.
     areaServed: { '@type': 'Country', name: company.address.country },
+    audience: { '@type': 'BusinessAudience', audienceType: 'Empresas' },
     availableChannel: {
       '@type': 'ServiceChannel',
       serviceUrl: SITE_URL,

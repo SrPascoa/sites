@@ -16,7 +16,6 @@ import {
   CUSTOM_PROJECTS,
   DEFAULT_DESCRIPTION,
   DEFAULT_TITLE,
-  LEGAL_PAGES,
   ORGANIZATION_SUMMARY,
   PORTAL_URL,
   SHARE_IMAGE,
@@ -26,7 +25,7 @@ import {
   TWITTER_HANDLE,
   buildJsonLd,
 } from '../src/config/seo.ts';
-import { company, contact, fullAddress, whatsappUrl } from '../src/config/site.ts';
+import { company, contact, fullAddress, legalPages, whatsappUrl } from '../src/config/site.ts';
 
 const ROBOTS_DIRECTIVES = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
 
@@ -125,6 +124,7 @@ function renderFallback() {
         <li><a href="mailto:${contact.email}">${contact.email}</a></li>
         <li>${e(company.legalName)} · NIPC ${company.nipc} · ${e(fullAddress)}</li>
       </ul>
+      <p>${legalPages.map((page) => `<a href="${page.href}">${e(page.label)}</a>`).join(' · ')}</p>
       <p>${e(SITE_NAME)} é uma marca da <a href="${PORTAL_URL}">Brivon</a>. Conheça também ${SISTER_BRANDS.map(
         (brand) => `<a href="${brand.url}">${e(brand.name)}</a>`,
       ).join(' e ')}.</p>
@@ -138,7 +138,8 @@ function renderLlmsTxt() {
 
 - Nome legal: ${company.legalName} (NIPC ${company.nipc})
 - Sede: ${fullAddress}
-- Atendimento: em português, para empresas em Portugal
+- Atendimento: em português, só para empresas, em Portugal continental, Açores e Madeira (remoto)
+- Preços: anunciados sem IVA (serviço exclusivo para empresas)
 - Contacto: ${contact.email} · ${contact.whatsappLabel}
 - Marca da Brivon: ${PORTAL_URL}
 
@@ -183,7 +184,7 @@ ${SISTER_BRANDS.map((brand) => `- [${brand.name}](${brand.url}): ${brand.summary
 
 ## Optional
 
-${LEGAL_PAGES.map((page) => `- [${page.name}](${page.url})`).join('\n')}
+${legalPages.map((page) => `- [${page.label}](${page.href})`).join('\n')}
 `;
 }
 

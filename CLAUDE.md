@@ -3,6 +3,8 @@
 Landing page de página única (React 19 + Vite + Tailwind 4) do serviço de criação de websites da Brivon. Detalhes de conteúdo e estrutura no `README.md`.
 
 - Todo o texto visível é **português europeu (pt-PT)**. Comentários de código também em pt-PT.
+- Clientes: **só empresas** (preços anunciados sem IVA), em **Portugal continental, Açores e Madeira**, atendimento remoto.
+- Páginas legais (Termos, Privacidade, Cookies) vivem no portal brivon.pt — lista em `legalPages` (`src/config/site.ts`).
 - **Só factos verificáveis**: nada de números, avaliações, "+X clientes" ou testemunhos inventados (DL 57/2008). Os pontos marcados com `TODO` em `src/config/content.ts` estão por confirmar.
 
 ## Alojamento

@@ -99,7 +99,7 @@ export const serviceGroups = [
         desc: 'Submetemos o site ao Google no dia em que fica no ar.',
       },
       {
-        name: 'Google Meu Negócio',
+        name: 'Perfil da Empresa no Google',
         desc: 'Ficha otimizada e ligada ao site, para aparecer no mapa (plano Negócio).',
       },
       {
@@ -199,7 +199,7 @@ export const testimonials: readonly { quote: string; author: string; role: strin
 
 /**
  * Planos. Criação paga uma vez + anuidade obrigatória (domínio, alojamento, SSL, pequenas alterações).
- * ⚠️ TODO: confirmar se os valores são com ou sem IVA — ver `pricingNote`.
+ * Serviço só para empresas: valores sem IVA — ver `pricingNote`.
  */
 export const plans = [
   {
@@ -224,12 +224,12 @@ export const plans = [
     name: 'Negócio',
     price: '399 €',
     period: 'criação',
-    pitch: 'O mais escolhido: várias páginas e presença no mapa do Google.',
+    pitch: 'Várias páginas e presença no mapa do Google.',
     renewal: '+ 99 €/ano — domínio, alojamento, SSL e pequenas alterações',
     features: [
       'Até 5 páginas (serviços, galeria, sobre…)',
       'Tudo o que inclui o plano Presença',
-      'Google Meu Negócio otimizado',
+      'Perfil da Empresa no Google otimizado',
       'SEO local em cada página',
       'Ligação a marcações ou reservas',
       '2 rondas de revisão',
@@ -255,14 +255,14 @@ export const plans = [
   },
 ] as const;
 
-/** ⚠️ TODO: confirmar com a contabilidade. Para clientes particulares, os preços têm de ser anunciados com IVA incluído. */
+/** Serviço só para empresas (B2B), por isso os preços são anunciados sem IVA. A particulares teriam de incluir IVA. */
 export const pricingNote =
-  'Valores sem IVA. A anuidade começa no dia em que o site fica no ar. Páginas extra, loja online e alterações maiores são orçamentadas antes — nunca há surpresas na fatura.';
+  'Serviço exclusivo para empresas. Valores sem IVA, que acresce à taxa legal em vigor. A anuidade começa no dia em que o site fica no ar. Páginas extra, loja online e alterações maiores são orçamentadas antes — nunca há surpresas na fatura.';
 
 export const faq = [
   {
     q: 'Quanto custa, ao certo?',
-    a: 'A criação custa 199 € (1 página) ou 399 € (até 5 páginas). A isso soma-se uma anuidade de 79 € ou 99 € que cobre domínio, alojamento, certificado de segurança e pequenas alterações. Não há mensalidades. Lojas online, sistemas à medida e gestão de anúncios são orçamentados à parte.',
+    a: 'A criação custa 199 € (1 página) ou 399 € (até 5 páginas). A isso soma-se uma anuidade de 79 € ou 99 € que cobre domínio, alojamento, certificado de segurança e pequenas alterações. Todos os valores são sem IVA e não há mensalidades. Lojas online, sistemas à medida e gestão de anúncios são orçamentados à parte.',
   },
   {
     // TODO: se adotarem "paga só depois de aprovar", trocar para "Vejo o site antes de pagar?".

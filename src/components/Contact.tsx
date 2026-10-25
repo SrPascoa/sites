@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { SyntheticEvent } from 'react';
 import { CalendarCheck, ChevronDown, Clock, Mail, MapPin, Send } from 'lucide-react';
-import { app, contact, whatsappUrl } from '../config/site';
+import { app, contact, legalPages, whatsappUrl } from '../config/site';
 import { Button, ButtonLink } from './ui/Button';
 import Reveal from './ui/Reveal';
 import { Container, SectionHeading } from './ui/Section';
@@ -13,6 +13,8 @@ const situationOptions = [
   'Tenho site, mas está desatualizado',
   'Tenho site, mas não recebo pedidos',
 ];
+
+const privacyPage = legalPages.find((page) => page.href.endsWith('/privacy'))!;
 
 // text-base (16px) de propósito: abaixo disso o Safari do iPhone faz zoom ao tocar no campo.
 const inputClass =
@@ -196,7 +198,16 @@ export default function Contact() {
 
               <p className="mt-4 text-center text-xs leading-relaxed text-zinc-500">
                 Ao enviar, abrimos o WhatsApp com a sua mensagem já escrita. Os seus dados não são partilhados com
-                terceiros.
+                terceiros. Consulte a{' '}
+                <a
+                  href={privacyPage.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 transition-colors hover:text-brand-orange"
+                >
+                  {privacyPage.label}
+                </a>
+                .
               </p>
             </form>
           </Reveal>

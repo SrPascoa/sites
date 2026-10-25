@@ -1,5 +1,5 @@
-import { CalendarCheck, LogIn, Mail, MapPin, MessageCircle, UserPlus } from 'lucide-react';
-import { app, company, contact, fullAddress, navLinks, site, whatsappUrl } from '../config/site';
+import { Mail, MapPin, MessageCircle } from 'lucide-react';
+import { company, contact, fullAddress, legalPages, navLinks, site, whatsappUrl } from '../config/site';
 import { serviceGroups } from '../config/content';
 import Logo from './ui/Logo';
 import { Container } from './ui/Section';
@@ -14,12 +14,6 @@ const socials = [
   { href: contact.telegram, label: 'Telegram', Icon: TelegramIcon },
 ];
 
-const platformLinks = [
-  { href: app.booking, label: 'Agendar demonstração', Icon: CalendarCheck },
-  { href: app.register, label: 'Criar conta', Icon: UserPlus },
-  { href: app.url, label: 'Entrar na app', Icon: LogIn },
-];
-
 // Em ecrãs táteis (telemóvel, tablet, iPad deitado) cada link ganha altura de toque; com rato, no desktop, volta ao tamanho do texto.
 const linkClass =
   'py-1.5 text-sm text-zinc-400 transition-colors hover:text-brand-orange lg:[@media(pointer:fine)]:py-0';
@@ -29,8 +23,8 @@ export default function Footer() {
     <footer className="border-t border-white/10 bg-black/60">
       {/* Folga em baixo para o botão flutuante do WhatsApp não tapar o copyright. */}
       <Container className="pb-[calc(7rem+env(safe-area-inset-bottom))] pt-12 sm:pt-16 lg:pt-20">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-12 lg:grid-cols-4 xl:grid-cols-[1.4fr_0.8fr_1fr_1fr_1.3fr]">
-          <div className="col-span-2 lg:col-span-4 xl:col-span-1">
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:gap-12 lg:grid-cols-[1.4fr_0.8fr_1fr_1.3fr]">
+          <div className="col-span-2 lg:col-span-1">
             <a href="#topo" aria-label={`${site.name} ${site.nameAccent} — início`}>
               <Logo size="sm" />
             </a>
@@ -85,26 +79,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="col-span-2 sm:col-span-1">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-200">Plataforma</h2>
-            <ul className="mt-4 space-y-1 lg:mt-5 lg:[@media(pointer:fine)]:space-y-3">
-              {platformLinks.map(({ href, label, Icon }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center gap-2.5 ${linkClass}`}
-                  >
-                    <Icon className="h-4 w-4 shrink-0" />
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="col-span-2 sm:col-span-1">
+          <div className="col-span-2 lg:col-span-1">
             <h2 className="text-sm font-semibold uppercase tracking-wider text-zinc-200">Contacto</h2>
             <ul className="mt-5 space-y-4">
               <li>
@@ -165,6 +140,21 @@ export default function Footer() {
               {company.ral.name}
             </a>
             . Foro competente: {company.jurisdiction}.
+          </p>
+          <p>
+            {legalPages.map((page, index) => (
+              <span key={page.href}>
+                {index > 0 && ' · '}
+                <a
+                  href={page.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 transition-colors hover:text-brand-orange"
+                >
+                  {page.label}
+                </a>
+              </span>
+            ))}
           </p>
         </div>
 

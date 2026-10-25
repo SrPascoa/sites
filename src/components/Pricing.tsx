@@ -1,4 +1,4 @@
-import { Check, Sparkles } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { plans, pricingNote } from '../config/content';
 import { whatsappUrl } from '../config/site';
 import BorderBeam from './ui/BorderBeam';
@@ -28,13 +28,6 @@ export default function Pricing() {
             }`}
           >
             {plan.highlighted && <BorderBeam size={260} duration={10} borderWidth={2} />}
-
-            {plan.highlighted && (
-              <span className="absolute -top-3.5 left-1/2 z-20 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-brand-orange px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-white">
-                <Sparkles className="h-3.5 w-3.5" />
-                Mais escolhido
-              </span>
-            )}
 
             <h3 className="font-display text-lg font-bold uppercase tracking-wide text-zinc-300">{plan.name}</h3>
             <p className="mt-3 text-pretty text-sm leading-relaxed text-zinc-400">{plan.pitch}</p>

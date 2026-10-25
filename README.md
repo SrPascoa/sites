@@ -23,7 +23,7 @@ Os pontos marcados com `TODO` nesses ficheiros são **placeholders** e têm de s
 1. **`contact.whatsapp`** — número real, só dígitos com indicativo (ex.: `351912345678`). É usado em todos os CTAs do site.
 2. **`contact.email`**, **`contact.whatsappLabel`**, **`contact.social.*`**, **`site.url`**.
 3. **`examples`** em `content.ts` — são estruturas tipo por setor, não clientes. Quando houver sites reais, substituir e preencher `url`: a secção passa a chamar-se "Portefólio" e mostra o link. **`testimonials`** está vazio de propósito; o bloco só aparece com depoimentos reais e autorizados.
-4. **`plans`** e **`pricingNote`** — preços 199 €/399 €/149 € + anuidade 79 €/99 €. Confirmar se são com ou sem IVA (para particulares têm de ser anunciados com IVA).
+4. **`plans`** e **`pricingNote`** — preços 199 €/399 € + anuidade 79 €/99 €, **sem IVA**: o serviço é só para empresas. Se um dia passar a vender a particulares, os preços têm de ser anunciados com IVA.
 5. **`About.tsx`** — falta o nome e a fotografia de quem fala com o cliente.
 
 A versão anterior (Brivon Tráfego) está guardada em `_backup-trafego/`.

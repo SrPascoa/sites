@@ -37,14 +37,21 @@ export const company = {
   ral: { name: 'CNIACC — Centro Nacional de Informação e Arbitragem de Conflitos de Consumo', url: 'https://www.cniacc.pt' },
 } as const;
 
-export const fullAddress = `${company.address.street}, ${company.address.postalCode} ${company.address.city}, ${company.address.country}`;
+/** Páginas legais: vivem no portal brivon.pt (as mesmas do rodapé de lá). */
+export const legalPages = [
+  { label: 'Termos de Serviço', href: 'https://brivon.pt/terms' },
+  { label: 'Política de Privacidade', href: 'https://brivon.pt/privacy' },
+  { label: 'Política de Cookies', href: 'https://brivon.pt/cookies' },
+] as const;
+
+export const fullAddress =`${company.address.street}, ${company.address.postalCode} ${company.address.city}, ${company.address.country}`;
 
 export const contact = {
   whatsapp: '351928202858', // só dígitos com indicativo do país
   whatsappLabel: '+351 928 202 858',
   email: 'geral@brivon.pt',
   telegram: 'https://t.me/brivon_lda',
-  location: 'Atendimento remoto — Portugal & Brasil',
+  location: 'Atendimento remoto — Portugal continental, Açores e Madeira',
   hours: 'Segunda a sexta, 09h às 18h',
   social: {
     instagram: 'https://instagram.com/brivon.pt',
