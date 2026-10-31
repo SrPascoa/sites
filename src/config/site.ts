@@ -25,7 +25,7 @@ export const company = {
   nipc: '519586565',
   vatId: 'PT519586565',
   address: {
-    street: 'Rua Celado 8',
+    street: 'Rua do Selado 8',
     postalCode: '5000-011',
     city: 'Vila Real',
     country: 'Portugal',
